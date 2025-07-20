@@ -4,7 +4,7 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 
 ## Features
 
-- 🎨 **Catppuccin Theme** - Beautiful and modern color scheme
+- 🎨 **Catppuccin Theme** - Beautiful and modern color scheme with JetBrains Mono Nerd Font
 - 🔍 **Telescope** - Fuzzy finder for files, grep, and more
 - 🌳 **Treesitter** - Advanced syntax highlighting and code parsing
 - 📁 **NvimTree** - File explorer
@@ -145,7 +145,7 @@ To add a new plugin, edit `lua/plugins/init.lua` and add your plugin configurati
 ## Customization
 
 ### Theme
-The configuration uses the Catppuccin theme. You can change the theme by modifying the theme section in `lua/plugins/init.lua`.
+The configuration uses the Catppuccin theme with JetBrains Mono Nerd Font. You can change the theme by modifying the theme section in `lua/plugins/theme.lua`.
 
 ### Key mappings
 All key mappings are defined in `init.lua`. You can modify them according to your preferences.
@@ -185,6 +185,7 @@ If plugins fail to install, try:
 - Neovim 0.8.0 or higher
 - Git
 - A terminal with true color support
+- JetBrains Mono Nerd Font (for best experience)
 - For C++: clangd
 - For Python: pyright
 

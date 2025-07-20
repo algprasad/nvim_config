@@ -20,6 +20,7 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - 🐙 **Git integration** - Git signs and status
 - 🎯 **Noice** - Beautiful command line and UI
 - 🔔 **Notifications** - Beautiful notification system
+- 🏠 **Dashboard** - Beautiful startup screen with quick actions
 
 ## Key Mappings
 
@@ -57,6 +58,7 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 ### General
 - `<leader>w` - Save file
 - `<leader>q` - Quit
+- `<leader>d` - Open dashboard
 
 ## Installation
 

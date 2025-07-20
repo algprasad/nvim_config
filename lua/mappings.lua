@@ -37,4 +37,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Save and quit
 keymap("n", "<leader>w", "<cmd>w<cr>", opts)
-keymap("n", "<leader>q", "<cmd>q<cr>", opts) 
+keymap("n", "<leader>q", "<cmd>q<cr>", opts)
+
+-- Dashboard
+keymap("n", "<leader>d", "<cmd>Alpha<cr>", opts) 

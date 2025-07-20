@@ -19,6 +19,7 @@ return {
         "clangd",
         "pyright",
         "lua_ls",
+        "cmake",
       },
       automatic_installation = true,
     })
@@ -113,6 +114,24 @@ return {
           telemetry = {
             enable = false,
           },
+        },
+      },
+    })
+
+    -- CMake LSP
+    require("lspconfig").cmake.setup({
+      capabilities = capabilities,
+      settings = {
+        cmake = {
+          buildDirectory = "build",
+          configureSettings = {},
+          sourceDirectory = ".",
+          generator = "Unix Makefiles",
+          buildType = "Debug",
+          installPrefix = "/usr/local",
+          parallelJobs = 4,
+          trace = false,
+          debug = false,
         },
       },
     })

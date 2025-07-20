@@ -31,7 +31,9 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - `<leader>ff` - Find files with Telescope
 - `<leader>fg` - Live grep with Telescope
 - `<leader>fb` - Browse buffers with Telescope
+- `<leader>fd` - Find files from home directory
 - `<C-n>` - Toggle NvimTree file explorer
+- `<leader>r` - Refresh NvimTree
 
 ### Terminal
 - `<leader>t` - Toggle terminal
@@ -59,6 +61,8 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - `<leader>w` - Save file
 - `<leader>q` - Quit
 - `<leader>d` - Open dashboard
+- `<leader>cd` - Change to current file's directory
+- `<leader>lcd` - Change local directory to current file's directory
 
 ## Installation
 
@@ -110,6 +114,11 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - **LSP**: clangd (automatically installed via Mason)
 - **Features**: Code completion, error checking, refactoring, go-to-definition
 - **Configuration**: Optimized for modern C++ development
+
+### CMake
+- **LSP**: cmake-language-server (automatically installed via Mason)
+- **Features**: CMake syntax highlighting, autocompletion, error checking, go-to-definition
+- **Configuration**: Build directory, generator, and parallel jobs settings
 
 ### Python
 - **LSP**: Pyright (automatically installed via Mason)

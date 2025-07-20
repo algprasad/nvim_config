@@ -7,9 +7,11 @@ keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
+keymap("n", "<leader>fd", "<cmd>Telescope find_files cwd=~<cr>", opts)
 
 -- NvimTree
 keymap("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", opts)
+keymap("n", "<leader>r", "<cmd>NvimTreeRefresh<cr>", opts)
 
 -- ToggleTerm
 keymap("n", "<leader>t", "<cmd>ToggleTerm<cr>", opts)
@@ -40,4 +42,8 @@ keymap("n", "<leader>w", "<cmd>w<cr>", opts)
 keymap("n", "<leader>q", "<cmd>q<cr>", opts)
 
 -- Dashboard
-keymap("n", "<leader>d", "<cmd>Alpha<cr>", opts) 
+keymap("n", "<leader>d", "<cmd>Alpha<cr>", opts)
+
+-- Directory navigation
+keymap("n", "<leader>cd", "<cmd>cd %:p:h<cr>", opts)
+keymap("n", "<leader>lcd", "<cmd>lcd %:p:h<cr>", opts) 

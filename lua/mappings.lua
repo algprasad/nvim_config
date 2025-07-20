@@ -11,6 +11,12 @@ keymap("n", "<leader>fd", "<cmd>Telescope find_files cwd=~<cr>", opts)
 keymap("n", "<leader>xx", "<cmd>Telescope diagnostics<cr>", opts)
 keymap("n", "<leader>xe", "<cmd>Telescope diagnostics severity=ERROR<cr>", opts)
 keymap("n", "<leader>xw", "<cmd>Telescope diagnostics severity=WARN<cr>", opts)
+keymap("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>", opts)
+keymap("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", opts)
+keymap("n", "<leader>fw", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
+keymap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", opts)
+keymap("n", "<leader>fd", "<cmd>Telescope lsp_definitions<cr>", opts)
+keymap("n", "<leader>ft", "<cmd>Telescope lsp_type_definitions<cr>", opts)
 
 -- NvimTree
 keymap("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", opts)

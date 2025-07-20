@@ -35,6 +35,14 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - `<leader>fg` - Live grep with Telescope
 - `<leader>fb` - Browse buffers with Telescope
 - `<leader>fd` - Find files from home directory
+
+### LSP Telescope
+- `<leader>fr` - Find references with Telescope
+- `<leader>fs` - Find document symbols with Telescope
+- `<leader>fw` - Find workspace symbols with Telescope
+- `<leader>fi` - Find implementations with Telescope
+- `<leader>fd` - Find definitions with Telescope
+- `<leader>ft` - Find type definitions with Telescope
 - `<C-n>` - Toggle NvimTree file explorer
 - `<leader>r` - Refresh NvimTree
 

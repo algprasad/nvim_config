@@ -2,8 +2,11 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Set font
+-- Set font for GUI Neovim
 vim.opt.guifont = "JetBrainsMono Nerd Font:h12"
+
+-- Set font for terminal Neovim (if supported)
+vim.opt.guifontwide = "JetBrainsMono Nerd Font:h12"
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

@@ -36,6 +36,8 @@ require("lazy").setup({
   { import = "plugins.indent" },
   { import = "plugins.lualine" },
   { import = "plugins.notify" },
+  { import = "plugins.debugger" },
+  { import = "plugins.bufferline" },
 })
 
 -- Load keymaps

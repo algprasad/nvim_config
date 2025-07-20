@@ -21,6 +21,9 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - 🎯 **Noice** - Beautiful command line and UI
 - 🔔 **Notifications** - Beautiful notification system
 - 🏠 **Dashboard** - Beautiful startup screen with quick actions
+- 🐛 **Debugger** - Full debugging support for C++ and Python with nvim-dap
+- 📊 **Bufferline** - Beautiful tab bar showing all open files
+- 🔍 **Diagnostics** - Advanced diagnostic viewing and navigation
 
 ## Key Mappings
 
@@ -44,8 +47,21 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - `gd` - Go to definition
 - `gr` - Go to references
 - `K` - Hover documentation
-- `<leader>ca` - Code actions
+- `<leader>ca` - Code actions (shows all available fixes/refactors)
+- `<leader>cA` - Range code actions (for selected text)
+- `<leader>cf` - Quick fix code actions only
+- `<leader>cr` - Refactor code actions only
+- `<leader>cs` - Source code actions only
 - `<leader>rn` - Rename symbol
+
+### Diagnostics
+- `<leader>xx` - Show all diagnostics with Telescope
+- `<leader>xe` - Show only errors with Telescope
+- `<leader>xw` - Show only warnings with Telescope
+- `[d` - Go to previous diagnostic
+- `]d` - Go to next diagnostic
+- `<leader>e` - Show diagnostic in floating window
+- `<leader>q` - Open location list with diagnostics
 
 ### Buffer Management
 - `<leader>bn` - Next buffer
@@ -54,8 +70,31 @@ A modern Neovim configuration using Lazy package manager with Catppuccin theme, 
 - `<Tab>` - Next buffer
 - `<S-Tab>` - Previous buffer
 
+### Bufferline (Tab Bar)
+- `<leader>1-9` - Jump to buffer 1-9
+- `<leader>0` - Jump to buffer 10
+- `<leader>bp` - Pick a buffer to switch to
+- `<leader>bc` - Pick a buffer to close
+- `<leader>bl` - Close all buffers to the left
+- `<leader>br` - Close all buffers to the right
+- `<leader>bo` - Close all other buffers
+
 ### Window Navigation
 - `<C-h/j/k/l>` - Navigate between windows
+
+### Debugger
+- `<leader>db` - Toggle breakpoint
+- `<leader>dc` - Continue debugging
+- `<leader>di` - Step into
+- `<leader>do` - Step over
+- `<leader>du` - Step out
+- `<leader>dr` - Toggle REPL
+- `<leader>dl` - Run last configuration
+- `<leader>dt` - Terminate debugging
+- `<leader>dw` - Show watches
+- `<leader>ds` - Show scopes
+- `<leader>dh` - Show call stack
+- `<leader>dbp` - Show breakpoints
 
 ### General
 - `<leader>w` - Save file

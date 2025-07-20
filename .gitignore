@@ -1,0 +1,30 @@
+# Neovim cache and temporary files
+.vim/
+*.swp
+*.swo
+*~
+
+# Lazy cache
+lazy-lock.json
+
+# Treesitter cache
+*.so
+
+# Test files
+test.cpp
+test.py
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs* 

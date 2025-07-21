@@ -45,6 +45,12 @@ return {
         commented = true,
       })
 
+      -- Configure breakpoint signs
+      vim.fn.sign_define('DapBreakpoint', {text='●', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint'})
+      vim.fn.sign_define('DapBreakpointCondition', {text='●', texthl='DapBreakpointCondition', linehl='DapBreakpointCondition', numhl='DapBreakpointCondition'})
+      vim.fn.sign_define('DapLogPoint', {text='●', texthl='DapLogPoint', linehl='DapLogPoint', numhl='DapLogPoint'})
+      vim.fn.sign_define('DapStopped', {text='●', texthl='DapStopped', linehl='DapStopped', numhl='DapStopped'})
+
       -- Automatically open dap-ui when debugging starts
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
@@ -59,15 +65,18 @@ return {
         dapui.close()
       end
 
+      -- Custom highlight groups for breakpoints
+      vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = '#ff0000', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'DapBreakpointCondition', { fg = '#ffa500', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'DapLogPoint', { fg = '#00ff00', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'DapStopped', { fg = '#00ffff', bg = 'NONE' })
+
       -- C++ Debugger Configuration
+      -- Configure the C++ debugger (using gdb)
       dap.adapters.cppdbg = {
-        id = "cppdbg",
-        type = "executable",
-        command = "cpptools",
-        args = {},
-        options = {
-          detached = false,
-        },
+        type = 'executable',
+        command = '/opt/homebrew/bin/gdb', 
+        name = "cppdbg",
       }
 
       dap.configurations.cpp = {
@@ -83,7 +92,7 @@ return {
           args = {},
           runInTerminal = false,
           MIMode = "gdb",
-          miDebuggerPath = "/usr/bin/gdb",
+          miDebuggerPath = "/opt/homebrew/bin/gdb",
           setupCommands = {
             {
               description = "Enable pretty-printing for gdb",
@@ -112,46 +121,19 @@ return {
       -- Python Debugger Configuration
       dap.adapters.python = {
         type = "executable",
-        command = "python",
+        command = vim.fn.getcwd() .. "/.venv/bin/python",
         args = { "-m", "debugpy.adapter" },
       }
 
       dap.configurations.python = {
         {
+          type = "python",
+          request = "launch",
           name = "Launch file",
-          type = "python",
-          request = "launch",
           program = "${file}",
-          console = "integratedTerminal",
-          justMyCode = true,
-        },
-        {
-          name = "Launch file (external terminal)",
-          type = "python",
-          request = "launch",
-          program = "${file}",
-          console = "externalTerminal",
-          justMyCode = true,
-        },
-        {
-          name = "Attach to process",
-          type = "python",
-          request = "attach",
-          processId = function()
-            return tonumber(vim.fn.input("Process ID: "))
+          pythonPath = function()
+            return vim.fn.getcwd() .. "/.venv/bin/python"
           end,
-          justMyCode = true,
-        },
-        {
-          name = "Attach by address",
-          type = "python",
-          request = "attach",
-          connect = function()
-            local host = vim.fn.input("Host [127.0.0.1]: ", "127.0.0.1")
-            local port = tonumber(vim.fn.input("Port [5678]: ", "5678"))
-            return { host = host, port = port }
-          end,
-          justMyCode = true,
         },
       }
     end,

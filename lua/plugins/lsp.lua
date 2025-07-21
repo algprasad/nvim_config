@@ -92,6 +92,16 @@ return {
     -- Pyright for Python
     require("lspconfig").pyright.setup({
       capabilities = capabilities,
+      root_dir = require("lspconfig.util").root_pattern(
+        "pyrightconfig.json",
+        "pyproject.toml", 
+        "setup.py",
+        "setup.cfg",
+        "requirements.txt",
+        "Pipfile",
+        "pyproject.toml",
+        ".git"
+      ),
       settings = {
         python = {
           analysis = {

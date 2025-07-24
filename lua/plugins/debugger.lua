@@ -72,10 +72,10 @@ return {
       vim.api.nvim_set_hl(0, 'DapStopped', { fg = '#00ffff', bg = 'NONE' })
 
       -- C++ Debugger Configuration
-      -- Configure the C++ debugger (using gdb)
+      -- Configure the C++ debugger (using lldb)
       dap.adapters.cppdbg = {
         type = 'executable',
-        command = '/opt/homebrew/bin/gdb', 
+        command = '/usr/bin/lldb', 
         name = "cppdbg",
       }
 
@@ -91,23 +91,23 @@ return {
           stopAtEntry = false,
           args = {},
           runInTerminal = false,
-          MIMode = "gdb",
-          miDebuggerPath = "/opt/homebrew/bin/gdb",
+          MIMode = "lldb",
+          miDebuggerPath = "/usr/bin/lldb",
           setupCommands = {
             {
-              description = "Enable pretty-printing for gdb",
+              description = "Enable pretty-printing for lldb",
               text = "-enable-pretty-printing",
               ignoreFailures = true,
             },
           },
         },
         {
-          name = "Attach to gdbserver :1234",
+          name = "Attach to lldbserver :1234",
           type = "cppdbg",
           request = "launch",
-          MIMode = "gdb",
+          MIMode = "lldb",
           miDebuggerServerAddress = "localhost:1234",
-          miDebuggerPath = "/usr/bin/gdb",
+          miDebuggerPath = "/usr/bin/lldb",
           cwd = "${workspaceFolder}",
           program = function()
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")

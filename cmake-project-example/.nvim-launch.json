@@ -1,0 +1,62 @@
+{
+  "cpp": [
+    {
+      "name": "Run Main App",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_app",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    },
+    {
+      "name": "Run Main App with Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_app",
+      "args": ["--debug", "--verbose"],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "DEBUG_LEVEL": "2"
+      }
+    },
+    {
+      "name": "Run Tests",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/tests",
+      "args": ["--gtest_output=xml:test_results.xml"],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    },
+    {
+      "name": "Run Benchmark",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/benchmark",
+      "args": ["--benchmark_format=json", "--benchmark_out=results.json"],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    },
+    {
+      "name": "Run with Input File",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_app",
+      "args": ["--input", "data/input.txt", "--output", "data/output.txt"],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    },
+    {
+      "name": "Run Performance Test",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_app",
+      "args": ["--performance", "--iterations", "1000"],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PERF_MODE": "1"
+      }
+    }
+  ]
+} 

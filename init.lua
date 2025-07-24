@@ -33,7 +33,7 @@ require("lazy").setup({
   { import = "plugins.nvimtree" },
   { import = "plugins.toggleterm" },
   { import = "plugins.lsp" },
-  { import = "plugins.gitsigns" },
+  { import = "plugins.git" },
   { import = "plugins.comment" },
   { import = "plugins.autopairs" },
   { import = "plugins.indent" },
@@ -41,6 +41,7 @@ require("lazy").setup({
   { import = "plugins.notify" },
   { import = "plugins.debugger" },
   { import = "plugins.bufferline" },
+  { import = "plugins.formatter" },
 })
 
 -- Load keymaps
@@ -68,4 +69,10 @@ vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 vim.opt.completeopt = "menu,menuone,noselect"
 
- 
+-- Auto-format JSON files on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.json",
+  callback = function()
+    vim.cmd("FormatWrite")
+  end,
+})

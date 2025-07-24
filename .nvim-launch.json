@@ -1,0 +1,114 @@
+{
+  "cpp": [
+    {
+      "name": "Debug C++",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb"
+    },
+    {
+      "name": "Release C++",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/${fileBasenameNoExtension}",
+      "args": ["--release"],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb"
+    }
+  ],
+  "python": [
+    {
+      "name": "Debug Python",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "args": [],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    },
+    {
+      "name": "Run with Arguments",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "args": ["--debug", "--verbose"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run Module",
+      "type": "python",
+      "request": "launch",
+      "module": "main",
+      "args": [],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    }
+  ],
+  "javascript": [
+    {
+      "name": "Debug Node.js",
+      "type": "node",
+      "request": "launch",
+      "program": "${file}",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    },
+    {
+      "name": "Run with Nodemon",
+      "type": "node",
+      "request": "launch",
+      "command": "nodemon",
+      "args": ["${file}"],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    }
+  ],
+  "go": [
+    {
+      "name": "Debug Go",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${fileDirname}",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    }
+  ],
+  "rust": [
+    {
+      "name": "Debug Rust",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/${workspaceFolderBasename}",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    },
+    {
+      "name": "Run Cargo",
+      "type": "lldb",
+      "request": "launch",
+      "command": "cargo",
+      "args": ["run"],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    }
+  ]
+} 

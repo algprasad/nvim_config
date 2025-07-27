@@ -32,7 +32,7 @@ keymap("n", "<leader>e", "<cmd>NvimTreeRefresh<cr>", opts)                      
 -- TERMINAL
 -- ============================================================================
 keymap("n", "<leader>t", "<cmd>ToggleTerm<cr>", opts)                               -- Toggle terminal
-keymap("t", "<esc>", "<cmd>ToggleTerm<cr>", opts)                                   -- Exit terminal mode
+keymap("t", "<esc>", "<cmd>stopinsert<cr>", opts)                              -- Switch to normal mode
 
 -- ============================================================================
 -- LSP (Language Server Protocol)

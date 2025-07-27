@@ -200,23 +200,23 @@ return {
         view = {
           default = {
             layout = "diff2_horizontal",
-            winbar_info = true,
+            winbar_info = false,  -- Disable winbar to avoid conflicts
           },
           file_history = {
             layout = "diff2_horizontal",
-            winbar_info = true,
+            winbar_info = false,  -- Disable winbar to avoid conflicts
           },
         },
-        floating_win_config = {
-          border = "rounded",
-          winblend = 0,
-          width = 0.9,
-          height = 0.8,
-        },
+
         hooks = {
           diff_buf_read = function()
             -- Optional: customize diff buffer behavior
           end,
+        },
+        -- Disable problematic features that might cause errors
+        default_args = {
+          DiffviewOpen = {},
+          DiffviewFileHistory = {},
         },
         keymaps = {
           disable_defaults = false,

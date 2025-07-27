@@ -9,8 +9,8 @@ return {
       shade_filetypes = {},
       shade_terminals = true,
       shading_factor = 2,
-      start_in_insert = true,
-      insert_mappings = true,
+      start_in_insert = false,
+      insert_mappings = false,  -- Disable insert mappings to allow normal mode
       persist_size = true,
       direction = "float",
       close_on_exit = true,

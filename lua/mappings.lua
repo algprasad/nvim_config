@@ -155,4 +155,21 @@ keymap("n", "<leader>bc", "<cmd>BufferLinePickClose<cr>", opts)                 
 keymap("n", "<leader>bb", "<cmd>BufferLinePick<cr>", opts)                          -- Pick buffer to switch
 keymap("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", opts)                     -- Close buffers to left
 keymap("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>", opts)                    -- Close buffers to right
-keymap("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", opts)                   -- Close other buffers 
+keymap("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", opts)                   -- Close other buffers
+
+-- ============================================================================
+-- COPILOT
+-- ============================================================================
+-- Copilot suggestions
+keymap("i", "<C-j>", "<Plug>(copilot-next)", { silent = true })                    -- Accept next suggestion
+keymap("i", "<C-k>", "<Plug>(copilot-previous)", { silent = true })                 -- Accept previous suggestion
+keymap("i", "<C-l>", "<Plug>(copilot-suggest)", { silent = true })                  -- Trigger suggestion
+
+-- Copilot Chat
+keymap("n", "<leader>bc", "<cmd>CopilotChat<cr>", opts)                             -- Open Copilot Chat
+keymap("n", "<leader>bt", "<cmd>CopilotChatToggle<cr>", opts)                       -- Toggle Copilot Chat
+keymap("v", "<leader>be", "<cmd>CopilotChatExplain<cr>", opts)                      -- Explain selected code
+keymap("v", "<leader>bf", "<cmd>CopilotChatFix<cr>", opts)                          -- Fix selected code
+keymap("v", "<leader>bg", "<cmd>CopilotChatTests<cr>", opts)                        -- Generate tests for selected code
+keymap("n", "<leader>bd", "<cmd>CopilotChatDocs<cr>", opts)                         -- Generate documentation
+keymap("v", "<leader>br", "<cmd>CopilotChatReview<cr>", opts)                       -- Review current file 

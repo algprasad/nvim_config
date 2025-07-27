@@ -35,6 +35,7 @@ require("lazy").setup({
   { import = "plugins.lsp" },
   { import = "plugins.git" },
   { import = "plugins.comment" },
+  { import = "plugins.copilot" },
   { import = "plugins.autopairs" },
   { import = "plugins.indent" },
   { import = "plugins.lualine" },

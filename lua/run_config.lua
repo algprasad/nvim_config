@@ -225,7 +225,7 @@ end
 function M.run_config(config_name, file_path)
   local project_configs = load_project_config()
   local filetype = vim.bo.filetype
-  local configs = project_configs[filetype] or default_configs[filetype] or {}
+  local configs = project_configs['launches']
   
   -- Find the configuration
   local selected_config = nil
@@ -292,7 +292,7 @@ end
 function M.show_configs()
   local project_configs = load_project_config()
   local filetype = vim.bo.filetype
-  local configs = project_configs[filetype] or default_configs[filetype] or {}
+  local configs = project_configs['launches']
   
   if #configs == 0 then
     vim.notify("No configurations found for filetype: " .. filetype, vim.log.levels.WARN)

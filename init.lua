@@ -43,6 +43,7 @@ require("lazy").setup({
   { import = "plugins.debugger" },
   { import = "plugins.bufferline" },
   { import = "plugins.formatter" },
+  { import = "plugins.autosave" },
 })
 
 -- Load keymaps

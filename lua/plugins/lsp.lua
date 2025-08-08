@@ -20,7 +20,8 @@ return {
         "pyright",
         "lua_ls",
         "cmake",
-        "bashls",        -- Bash Language Server
+        "bashls", -- Bash Language Server
+        "shellcheck"       
       },
       automatic_installation = true,
     })

@@ -17,7 +17,7 @@ return {
       show_help = "no",
       debug = false,
       language = "English",
-      model = "gpt-4",
+      model = "gpt-4o",
       temperature = 0.1,
       -- Floating window configuration
       window = {

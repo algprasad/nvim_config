@@ -58,9 +58,6 @@ keymap("n", "<leader>cA", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts) 
 -- ============================================================================
 -- BUFFER MANAGEMENT
 -- ============================================================================
-keymap("n", "<leader>bn", "<cmd>bnext<cr>", opts)                                   -- Next buffer
-keymap("n", "<leader>bp", "<cmd>bprevious<cr>", opts)                               -- Previous buffer
-keymap("n", "<leader>bd", "<cmd>bdelete<cr>", opts)                                 -- Delete buffer
 keymap("n", "<Tab>", "<cmd>bnext<cr>", opts)                                        -- Next buffer (Tab)
 keymap("n", "<S-Tab>", "<cmd>bprevious<cr>", opts)                                  -- Previous buffer (Shift+Tab)
 
@@ -94,12 +91,6 @@ keymap("n", "<leader>gb", "<cmd>Neogit branch<cr>", opts)                       
 keymap("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", opts)                            -- Open diff view
 keymap("n", "<leader>gD", "<cmd>DiffviewClose<cr>", opts)                           -- Close diff view
 keymap("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", opts)                     -- File history
-
--- ============================================================================
--- DIRECTORY NAVIGATION
--- ============================================================================
-keymap("n", "<leader>cd", "<cmd>cd %:p:h<cr>", opts)                                -- Change to file directory
-keymap("n", "<leader>lcd", "<cmd>lcd %:p:h<cr>", opts)                              -- Change local directory
 
 -- ============================================================================
 -- CONFIGURATION
@@ -160,11 +151,6 @@ keymap("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", opts)               
 -- ============================================================================
 -- COPILOT
 -- ============================================================================
--- Copilot suggestions
-keymap("i", "<C-j>", "<Plug>(copilot-next)", { silent = true })                    -- Accept next suggestion
-keymap("i", "<C-k>", "<Plug>(copilot-previous)", { silent = true })                 -- Accept previous suggestion
-keymap("i", "<C-l>", "<Plug>(copilot-suggest)", { silent = true })                  -- Trigger suggestion
-
 -- Copilot Chat
 keymap("n", "<leader>bc", "<cmd>CopilotChat<cr>", opts)                             -- Open Copilot Chat
 keymap("n", "<leader>bt", "<cmd>CopilotChatToggle<cr>", opts)                       -- Toggle Copilot Chat
@@ -172,4 +158,61 @@ keymap("v", "<leader>be", "<cmd>CopilotChatExplain<cr>", opts)                  
 keymap("v", "<leader>bf", "<cmd>CopilotChatFix<cr>", opts)                          -- Fix selected code
 keymap("v", "<leader>bg", "<cmd>CopilotChatTests<cr>", opts)                        -- Generate tests for selected code
 keymap("n", "<leader>bd", "<cmd>CopilotChatDocs<cr>", opts)                         -- Generate documentation
-keymap("v", "<leader>br", "<cmd>CopilotChatReview<cr>", opts)                       -- Review current file 
+keymap("v", "<leader>br", "<cmd>CopilotChatReview<cr>", opts)                       -- Review current file
+
+-- Copilot Chat with Context
+keymap("n", "<leader>bq", function()                                                -- Chat about current buffer
+  local input = vim.fn.input("Chat about current buffer: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+  end
+end, opts)
+keymap("v", "<leader>bv", function()                                                -- Chat about visual selection
+  local input = vim.fn.input("Chat about selection: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, { selection = require("CopilotChat.select").visual })
+  end
+end, opts)
+keymap("n", "<leader>bw", function()                                                -- Chat about workspace
+  local input = vim.fn.input("Chat about workspace: ")
+  if input ~= "" then
+    require("CopilotChat").ask("@workspace " .. input)
+  end
+end, opts)
+keymap("n", "<leader>bs", function()                                                -- Quick chat with current buffer
+  require("CopilotChat").open({ selection = require("CopilotChat.select").buffer })
+end, opts)
+
+-- Copilot Editing Commands
+keymap("v", "<leader>bi", function()                                                -- Inline edit selected code
+  local input = vim.fn.input("Edit instruction: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, {
+      selection = require("CopilotChat.select").visual,
+      window = { layout = "replace" }
+    })
+  end
+end, opts)
+keymap("n", "<leader>bn", function()                                                -- Create new file with Copilot
+  local filename = vim.fn.input("New file name: ")
+  local content_request = vim.fn.input("What should this file contain: ")
+  if filename ~= "" and content_request ~= "" then
+    require("CopilotChat").ask("Create a new file with this content: " .. content_request, {
+      callback = function(response)
+        -- Create and edit new file
+        vim.cmd("edit " .. filename)
+        local lines = vim.split(response, "\n")
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+      end
+    })
+  end
+end, opts)
+keymap("n", "<leader>bm", function()                                                -- Modify current buffer
+  local input = vim.fn.input("How to modify this file: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, {
+      selection = require("CopilotChat.select").buffer,
+      window = { layout = "replace" }
+    })
+  end
+end, opts) 

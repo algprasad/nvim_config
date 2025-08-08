@@ -20,6 +20,7 @@ return {
         "pyright",
         "lua_ls",
         "cmake",
+        "bashls",        -- Bash Language Server
       },
       automatic_installation = true,
     })
@@ -147,6 +148,33 @@ return {
           debug = false,
         },
       },
+    })
+
+    -- Bash LSP
+    require("lspconfig").bashls.setup({
+      capabilities = capabilities,
+      filetypes = { "sh", "bash", "zsh" },
+      settings = {
+        bashIde = {
+          globPattern = "*@(.sh|.inc|.bash|.command)",
+          enableSourceErrorDiagnostics = true,
+          shellcheckPath = "shellcheck",
+          includeAllWorkspaceSymbols = true,
+        },
+      },
+      on_attach = function(client, bufnr)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        
+        -- Set up bash-specific keymaps
+        local opts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      end,
     })
   end,
 } 

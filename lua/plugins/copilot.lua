@@ -36,6 +36,27 @@ return {
       auto_close = true,
       -- Show system messages
       show_system_messages = false,
+      -- Enable file editing capabilities
+      auto_follow_cursor = false,
+      auto_insert_mode = false,
+      clear_chat_on_new_prompt = false,
+      history_path = vim.fn.stdpath("data") .. "/copilotchat_history",
+      -- Question header
+      question_header = "## User ",
+      -- Answer header
+      answer_header = "## Copilot ",
+      -- Error header
+      error_header = "## Error ",
+      -- Separator
+      separator = "---",
+      -- Show folds
+      show_folds = true,
+      -- Highlight
+      highlight_selection = true,
+      -- Context
+      context = nil,
+      -- Callback for after response
+      callback = nil,
     },
     event = "VeryLazy",
     dependencies = {

@@ -10,6 +10,42 @@ vim.opt.guifontwide = "JetBrainsMono Nerd Font:h12"
 
 -- add parameters hints 
 vim.lsp.inlay_hint.enable(true)
+
+-- Enhanced diagnostic display
+vim.diagnostic.config({
+  virtual_text = {
+    enabled = true,
+    source = "if_many",
+    prefix = "🔸",
+    spacing = 2,
+    severity = { min = vim.diagnostic.severity.HINT },
+  },
+  signs = {
+    active = true,
+    values = {
+      { name = "DiagnosticSignError", text = "❌" },
+      { name = "DiagnosticSignWarn", text = "⚠️" },
+      { name = "DiagnosticSignHint", text = "💡" },
+      { name = "DiagnosticSignInfo", text = "ℹ️" },
+    },
+  },
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "🔹 ",
+    focusable = false,
+    close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+  },
+})
+
+-- Set up diagnostic signs
+for _, sign in ipairs(vim.diagnostic.config().signs.values) do
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -46,6 +82,7 @@ require("lazy").setup({
   { import = "plugins.bufferline" },
   { import = "plugins.formatter" },
   { import = "plugins.autosave" },
+  { import = "plugins.cpp-tools" },
 })
 
 -- Load keymaps

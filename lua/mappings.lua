@@ -45,7 +45,8 @@ keymap("n", "<leader>rn", vim.lsp.buf.rename, opts)                             
 -- Diagnostics
 keymap("n", "[d", vim.diagnostic.goto_prev, opts)                                   -- Previous diagnostic
 keymap("n", "]d", vim.diagnostic.goto_next, opts)                                   -- Next diagnostic
-keymap("n", "<leader>xx", vim.diagnostic.open_float, opts)                          -- Show diagnostic
+keymap("n", "<leader>e", vim.diagnostic.open_float, opts)                           -- Show diagnostic on current line
+keymap("n", "gl", vim.diagnostic.open_float, opts)                                  -- Show diagnostic (alternative)
 keymap("n", "<leader>xl", vim.diagnostic.setloclist, opts)                          -- Location list
 
 -- Code Actions
@@ -54,6 +55,36 @@ keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.code_action({ context = { only =
 keymap("n", "<leader>cs", "<cmd>lua vim.lsp.buf.code_action({ context = { only = { 'source' } }})<cr>", opts)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)            -- All code actions
 keymap("n", "<leader>cA", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)      -- Range code actions
+
+-- C++ Specific Code Actions
+keymap("n", "<leader>cg", function()                                                 -- Generate function definition
+  vim.lsp.buf.code_action({
+    filter = function(action)
+      return action.title:match("Generate") or 
+             action.title:match("Define") or
+             action.title:match("Create function") or
+             action.title:match("Implement")
+    end,
+  })
+end, opts)
+keymap("n", "<leader>cq", function()                                                 -- Quick apply function generation
+  vim.lsp.buf.code_action({
+    filter = function(action)
+      return action.title:match("Define") or 
+             action.title:match("Create function") or
+             action.title:match("Generate") or
+             action.title:match("Implement")
+    end,
+    apply = true,
+  })
+end, opts)
+keymap("n", "<leader>ci", function()                                                 -- Add missing includes
+  vim.lsp.buf.code_action({
+    filter = function(action)
+      return action.title:match("Add.*include") or action.title:match("Include")
+    end,
+  })
+end, opts)
 
 -- ============================================================================
 -- BUFFER MANAGEMENT
@@ -142,10 +173,10 @@ keymap("n", "<leader>9", "<cmd>BufferLineGoToBuffer 9<cr>", opts)
 keymap("n", "<leader>0", "<cmd>BufferLineGoToBuffer 10<cr>", opts)
 
 -- Buffer management
-keymap("n", "<leader>bc", "<cmd>BufferLinePickClose<cr>", opts)                     -- Pick buffer to close
+keymap("n", "<leader>bx", "<cmd>BufferLinePickClose<cr>", opts)                     -- Pick buffer to close
 keymap("n", "<leader>bb", "<cmd>BufferLinePick<cr>", opts)                          -- Pick buffer to switch
 keymap("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", opts)                     -- Close buffers to left
-keymap("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>", opts)                    -- Close buffers to right
+keymap("n", "<leader>bR", "<cmd>BufferLineCloseRight<cr>", opts)                    -- Close buffers to right
 keymap("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", opts)                   -- Close other buffers
 
 -- ============================================================================

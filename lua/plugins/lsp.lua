@@ -85,10 +85,61 @@ return {
         "--completion-style=detailed",
         "--function-arg-placeholders",
         "--fallback-style=llvm",
+        "--suggest-missing-includes",
+        "--cross-file-rename",
+        "--enable-config",
       },
-
-    filetypes = {"c", "cpp", "h", "cc", "hpp"},
-    root_dir = require("lspconfig").util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+      filetypes = {"c", "cpp", "h", "cc", "hpp"},
+      root_dir = require("lspconfig").util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+      
+      on_attach = function(client, bufnr)
+        -- Enable LSP inlay hints
+        if client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint.enable(true)
+        end
+        
+        -- Set up C++ specific keymaps (only buffer-specific ones)
+        local opts = { noremap = true, silent = true, buffer = bufnr }
+        
+        -- C++ specific code actions for this buffer only
+        vim.keymap.set("n", "<leader>ch", function()
+          vim.lsp.buf.code_action({
+            filter = function(action)
+              return action.title:match("Add.*include") or 
+                     action.title:match("Generate") or
+                     action.title:match("Create") or
+                     action.title:match("Implement") or
+                     action.title:match("Define")
+            end,
+          })
+        end, opts)
+        
+        -- Quick apply function generation for C++ files
+        vim.keymap.set("n", "<leader>cq", function()
+          vim.lsp.buf.code_action({
+            filter = function(action)
+              return action.title:match("Define") or 
+                     action.title:match("Create function") or
+                     action.title:match("Generate") or
+                     action.title:match("Implement")
+            end,
+            apply = true,
+          })
+        end, opts)
+      end,
+      
+      -- Enhanced settings for better C++ support
+      settings = {
+        clangd = {
+          InlayHints = {
+            Designators = true,
+            Enabled = true,
+            ParameterNames = true,
+            DeducedTypes = true,
+          },
+          fallbackFlags = { "-std=c++17" },
+        },
+      },
     })
 
     -- Pyright for Python
@@ -167,14 +218,9 @@ return {
         -- Enable completion triggered by <c-x><c-o>
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
         
-        -- Set up bash-specific keymaps
+        -- Bash-specific settings (global keymaps are handled elsewhere)
         local opts = { noremap = true, silent = true, buffer = bufnr }
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        -- Add any bash-specific keymaps here if needed
       end,
     })
   end,

@@ -98,6 +98,12 @@ return {
           vim.lsp.inlay_hint.enable(true)
         end
         
+        -- Attach navic for breadcrumbs
+        if client.server_capabilities.documentSymbolProvider then
+          local navic = require("nvim-navic")
+          navic.attach(client, bufnr)
+        end
+        
         -- Set up C++ specific keymaps (only buffer-specific ones)
         local opts = { noremap = true, silent = true, buffer = bufnr }
         

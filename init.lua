@@ -77,6 +77,7 @@ require("lazy").setup({
   { import = "plugins.autopairs" },
   { import = "plugins.indent" },
   { import = "plugins.lualine" },
+  { import = "plugins.navic" },
   { import = "plugins.notify" },
   { import = "plugins.debugger" },
   { import = "plugins.bufferline" },

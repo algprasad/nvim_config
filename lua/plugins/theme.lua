@@ -249,6 +249,29 @@ return {
         transparent_bg = false,
         lualine_bg_color = "#44475a",
         italic_comment = true,
+        -- Override highlights to remove italics from data types
+        overrides = function(colors)
+          return {
+            -- C++ data types - remove italics
+            ["@type"] = { fg = colors.cyan, italic = false },
+            ["@type.builtin"] = { fg = colors.cyan, italic = false },
+            ["@type.definition"] = { fg = colors.cyan, italic = false },
+            ["Type"] = { fg = colors.cyan, italic = false },
+            ["StorageClass"] = { fg = colors.pink, italic = false },
+            ["Structure"] = { fg = colors.cyan, italic = false },
+            ["Typedef"] = { fg = colors.cyan, italic = false },
+            
+            -- Additional C++ specific highlights
+            ["@keyword.type"] = { fg = colors.pink, italic = false },
+            ["@storageclass"] = { fg = colors.pink, italic = false },
+            ["@type.qualifier"] = { fg = colors.pink, italic = false },
+            
+            -- Make sure these are not italic
+            ["cppType"] = { fg = colors.cyan, italic = false },
+            ["cppStorageClass"] = { fg = colors.pink, italic = false },
+            ["cppStructure"] = { fg = colors.cyan, italic = false },
+          }
+        end,
       })
       vim.cmd.colorscheme("dracula")  -- Uncomment to activate
     end,

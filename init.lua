@@ -8,6 +8,8 @@ vim.opt.guifont = "JetBrainsMono Nerd Font:h12"
 -- Set font for terminal Neovim (if supported)
 vim.opt.guifontwide = "JetBrainsMono Nerd Font:h12"
 
+-- add parameters hints 
+vim.lsp.inlay_hint.enable(true)
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
